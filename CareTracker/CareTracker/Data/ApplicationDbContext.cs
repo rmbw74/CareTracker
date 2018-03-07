@@ -12,8 +12,16 @@ namespace CareTracker.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-        }
+        {}
+
+        public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<Dependent> Dependent { get; set; }
+        public DbSet<DependentDoctor> DependentDoctor { get; set; }
+        public DbSet<DependentUser> DependentUser { get; set; }
+        public DbSet<Doctor> Doctor { get; set; }
+        public DbSet<Prescription> Prescription { get; set; }
+        public DbSet<SharedDependent> SharedDependent { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
