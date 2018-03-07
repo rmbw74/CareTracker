@@ -10,12 +10,12 @@ namespace CareTracker.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Appointment Day")]
+        [Display(Name = "Day")]
         public DateTime AppointmentDate { get; set; }
 
         [Required]
         [DataType(DataType.Time)]
-        [Display(Name = "Appointment Time")]
+        [Display(Name = "Time")]
         public DateTime AppointmentTime { get; set; }
 
         [Required]
@@ -23,7 +23,7 @@ namespace CareTracker.Models
         public string AppointmentReason { get; set; }
 
         [Required]
-        [Display(Name = "Appointment Address")]
+        [Display(Name = "Address")]
         public string AppointmentAddress { get; set; }
 
         [DataType(DataType.PhoneNumber)]

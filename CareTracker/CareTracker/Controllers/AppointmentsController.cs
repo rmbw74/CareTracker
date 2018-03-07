@@ -50,7 +50,7 @@ namespace CareTracker.Controllers
         public IActionResult Create()
         {
             ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "Address");
+            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace CareTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "Address", appointment.DoctorId);
+            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId","LastName", appointment.DoctorId);
             return View(appointment);
         }
 
@@ -86,7 +86,7 @@ namespace CareTracker.Controllers
                 return NotFound();
             }
             ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "Address", appointment.DoctorId);
+            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName", appointment.DoctorId);
             return View(appointment);
         }
 
