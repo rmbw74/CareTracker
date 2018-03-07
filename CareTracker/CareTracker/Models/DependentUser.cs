@@ -16,7 +16,7 @@ namespace CareTracker.Models
         [Required]
         public int DependentId { get; set;  }
 
-        public virtual Dependent Dependent { get; set; }
+        public Dependent Dependent { get; set; }
 
 
     }
