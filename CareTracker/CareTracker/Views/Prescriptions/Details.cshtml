@@ -1,0 +1,72 @@
+﻿@model CareTracker.Models.Prescription
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DrugName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dosage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dosage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Frequency)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Frequency)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PharmacyAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PharmacyAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PharmacyPhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PharmacyPhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrescriptionNotes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrescriptionNotes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrescriptionActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrescriptionActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dependent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dependent.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PrescriptionId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
