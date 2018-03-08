@@ -1,0 +1,76 @@
+﻿@model CareTracker.Models.Prescription
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Prescription</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrescriptionId" />
+            <div class="form-group">
+                <label asp-for="DrugName" class="control-label"></label>
+                <input asp-for="DrugName" class="form-control" />
+                <span asp-validation-for="DrugName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dosage" class="control-label"></label>
+                <input asp-for="Dosage" class="form-control" />
+                <span asp-validation-for="Dosage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Frequency" class="control-label"></label>
+                <input asp-for="Frequency" class="form-control" />
+                <span asp-validation-for="Frequency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PharmacyAddress" class="control-label"></label>
+                <input asp-for="PharmacyAddress" class="form-control" />
+                <span asp-validation-for="PharmacyAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PharmacyPhoneNumber" class="control-label"></label>
+                <input asp-for="PharmacyPhoneNumber" class="form-control" />
+                <span asp-validation-for="PharmacyPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrescriptionNotes" class="control-label"></label>
+                <input asp-for="PrescriptionNotes" class="form-control" />
+                <span asp-validation-for="PrescriptionNotes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PrescriptionActive" /> @Html.DisplayNameFor(model => model.PrescriptionActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DependentId" class="control-label"></label>
+                <select asp-for="DependentId" class="form-control" asp-items="ViewBag.DependentId"></select>
+                <span asp-validation-for="DependentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorId" class="control-label"></label>
+                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.DoctorId"></select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CareTracker.Models
 {
@@ -10,7 +11,7 @@ namespace CareTracker.Models
         [Required]
         [Display(Name = "Drug Name")]
         public string DrugName { get; set; }
-        
+
         [Required]
         public string Dosage { get; set; }
 
@@ -29,7 +30,7 @@ namespace CareTracker.Models
         public string PrescriptionNotes { get; set; }
 
         [Required]
-        [Display(Name = "Prescription Is Active?")]
+        [Display(Name = "Active?")]
         public bool PrescriptionActive { get; set; }
 
         [Required]
@@ -40,7 +41,10 @@ namespace CareTracker.Models
         public virtual Doctor Doctor { get; set; }
 
         //when a new Prescription is created, set PrescriptionActive to true by default
-        public Prescription() => PrescriptionActive = true;
+        public Prescription ()
+            {
+                PrescriptionActive = true;
+            }
 
 
 
