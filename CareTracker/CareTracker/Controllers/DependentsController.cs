@@ -21,9 +21,24 @@ namespace CareTracker.Controllers
             _context = context;
             _userManager = userManager;
         }
-
         // This task retrieves the currently authenticated user
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public ICollection<UserDependent> GetUserDependents (ApplicationUser User)
+        {
+            return (from d in _context.Dependent
+                    join du in _context.DependentUser
+                      on d.DependentId equals du.DependentId
+                    where du.User == User
+                    select new UserDependent
+                    {
+                        DependentUserId = du.DependentUserId,
+                        FirstName = d.FirstName,
+                        LastName = d.LastName,
+                        Birthday = d.Birthday
+                    }).ToList();
+        }
+
 
         // GET: Dependents
         public async Task<IActionResult> Index()
