@@ -4,27 +4,42 @@
     ViewData["Title"] = "Home Page";
 }
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <h1>Welcome To CareTracker, Please register or login to continue.</h1>
+}
+else
+{
+    <div id="UserDependentList" class="container container-fluid">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (Model.UserDependents.Count > 0)
+            {
+                @foreach (var userdependent in Model.UserDependents)
+                {
+                    <div id="movie--@Html.DisplayFor(modelItem => userdependent.DependentUserId)">
+                        <h4 class="dependent_firstname">
+                            @Html.DisplayFor(modelItem => userdependent.FirstName)
+                        </h4>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <h2>You don't have and dependents, please add some!</h2>
+            }
+
+        }
 
 
-<div id="UserDependentList" class="container container-fluid">
+    </div>
 
-    <h1>
-        This is where the dependent list will go
-    </h1>
+    <div id="HomePageInterfaceBar" class="container container-fluid">
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Add Dependent</button>
+        </div>
+    </div>
+}
 
-    @foreach (var userdependent in Model.UserDependents)
-    {
-       <div id="movie--@Html.DisplayFor(modelItem => userdependent.DependentUserId)">
-           <h4 class="dependent_firstname">
-               @Html.DisplayFor(modelItem => userdependent.FirstName)
-           </h4>
-       </div>
-    }
-
-</div>
-
-<div id="HomePageInterfaceBar" class="container container-fluid">
-    <h1>
-        This is where the affordance for new dependents will go
-    </h1>
-</div>

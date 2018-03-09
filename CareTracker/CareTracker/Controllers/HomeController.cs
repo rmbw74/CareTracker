@@ -41,11 +41,15 @@ namespace CareTracker.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ApplicationUser user = await GetCurrentUserAsync();
-            var model = new ViewDependentsHomePageViewModel();
+            if (User.Identity.IsAuthenticated)
+            {
+                ApplicationUser user = await GetCurrentUserAsync();
+                var model = new ViewDependentsHomePageViewModel();
 
-            model.UserDependents = GetUserDependents(user);
-            return View(model);
+                model.UserDependents = GetUserDependents(user);
+                return View(model);
+            }
+            return View();
         }
 
         public IActionResult About()
