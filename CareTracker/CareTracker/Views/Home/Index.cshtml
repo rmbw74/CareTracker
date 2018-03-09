@@ -1,29 +1,39 @@
 ﻿@model CareTracker.Models.DependentViewModels.ViewDependentsHomePageViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
+    
 }
 
 @if (!User.Identity.IsAuthenticated)
-{
-    <h1>Welcome To CareTracker, Please register or login to continue.</h1>
-}
+    {
+        <h1>Welcome To CareTracker, Please register or login to continue.</h1>
+    }
 else
-{
+    {
+    
+        var tableheaders = Model.UserDependents.FirstOrDefault();
+    
     <div id="UserDependentList" class="container container-fluid">
 
         @if (User.Identity.IsAuthenticated)
-        {
+
+         {
             @if (Model.UserDependents.Count > 0)
-            {
+             {
+   
+        
                 @foreach (var userdependent in Model.UserDependents)
-                {
-                    <div id="movie--@Html.DisplayFor(modelItem => userdependent.DependentUserId)">
-                        <h4 class="dependent_firstname">
-                            @Html.DisplayFor(modelItem => userdependent.FirstName)
-                        </h4>
-                    </div>
-                }
+                 {
+                      
+                            <div class="col-sm-2 UserDependentList__Dependent"
+                                 id="dependent--@Html.DisplayFor(modelItem => userdependent.DependentUserId)">
+                                 <h2 class="UserDependentList__DependentFirstName">@Html.DisplayFor(modelItem => userdependent.FirstName)</h2>
+                                 <h3 class="UserDependentList__DependentLastName">@Html.DisplayFor(modelItem => userdependent.LastName)</h3>
+                                 <h4>@Html.DisplayFor(modelItem => userdependent.Birthday)</h4>
+                            </div>
+                       
+                  }
+        
 
             }
             else
@@ -31,7 +41,7 @@ else
                 <h2>You don't have and dependents, please add some!</h2>
             }
 
-        }
+}
 
 
     </div>
