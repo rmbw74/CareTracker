@@ -50,7 +50,7 @@ namespace CareTracker.Controllers
         public IActionResult Create()
         {
             ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName");
+            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId","LastName");
             return View();
         }
 
