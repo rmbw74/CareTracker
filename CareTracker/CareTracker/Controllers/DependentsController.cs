@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using Microsoft.AspNetCore.Identity;
 using CareTracker.Models;
+using CareTracker.Models.DependentViewModels;
 
 namespace CareTracker.Controllers
 {
@@ -37,6 +38,17 @@ namespace CareTracker.Controllers
                         LastName = d.LastName,
                         Birthday = d.Birthday
                     }).ToList();
+        }
+
+        // GET: Dependents/Summary/5
+        public async Task<IActionResult> Summary(int? id)
+        {
+            //gets the current user
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            var model = new DependentSummaryViewModel();
+
+            return View(model);
         }
 
 
