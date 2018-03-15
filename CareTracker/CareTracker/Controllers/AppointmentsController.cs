@@ -58,8 +58,7 @@ namespace CareTracker.Controllers
         {
             ApplicationUser user = await GetCurrentUserAsync();
             var model = new AppointmentCreateViewModel(_context, user);
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName");
+           
             return View(model);
         }
 
@@ -70,7 +69,7 @@ namespace CareTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentTime,AppointmentReason,AppointmentAddress,AppointmentPhoneNumber,AppointmentNotes,DependentId,DoctorId")] Appointment appointment)
         {
-            
+       
             if (ModelState.IsValid)
             {
 
@@ -78,8 +77,7 @@ namespace CareTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId","LastName", appointment.DoctorId);
+           
             return View(appointment);
         }
 
