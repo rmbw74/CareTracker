@@ -1,0 +1,61 @@
+﻿@model CareTracker.Models.DoctorsViewModels.DependentDoctorsViewModel
+@{
+    ViewData["Title"] = "DependentDoctorsView";
+    var DoctorTableHeader = Model.Doctors.FirstOrDefault();
+}
+
+
+<h2> @Html.DisplayFor(model => model.Dependent.FirstName)'s Doctors </h2>
+
+
+
+
+<table id="DependentDoctorTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => DoctorTableHeader.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => DoctorTableHeader.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => DoctorTableHeader.Specialty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => DoctorTableHeader.Hospital)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => DoctorTableHeader.PhoneNumber)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Doctor in Model.Doctors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Doctor.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Doctor.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Doctor.Specialty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Doctor.Hospital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Doctor.PhoneNumber)
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-controller="Doctors" asp-action="Details" asp-route-id="@Doctor.DoctorId">Details</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

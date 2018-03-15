@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using CareTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using CareTracker.Models.DoctorsViewModels;
 
 namespace CareTracker.Controllers
 {
@@ -155,6 +157,36 @@ namespace CareTracker.Controllers
         private bool DoctorExists(int id)
         {
             return _context.Doctor.Any(e => e.DoctorId == id);
+        }
+
+        //GET: Doctors/DependentDoctors/5
+        [Authorize]
+        public IActionResult DependentDoctors(int id)
+        {
+          //instantiate a new view model
+          var model = new DependentDoctorsViewModel(id, _context );
+            
+            
+
+            return View(model);
+        }
+
+        public ICollection<Doctor> GetDependentDoctors(int id)
+        {
+            return (from d in _context.Doctor
+                    join dep in _context.DependentDoctor
+                    on d.DoctorId equals dep.DoctorId
+                    where dep.DependentId == id
+                    select new Doctor
+                    {
+                        DoctorId = d.DoctorId,
+                        FirstName = d.FirstName,
+                        LastName = d.LastName,
+                        Hospital = d.Hospital,
+                        Specialty = d.Specialty,
+                        Address= d.Address,
+                        PhoneNumber = d.PhoneNumber
+                    }).ToList();
         }
     }
 }
