@@ -66,6 +66,7 @@ namespace CareTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
