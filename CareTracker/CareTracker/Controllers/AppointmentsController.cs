@@ -72,6 +72,23 @@ namespace CareTracker.Controllers
        
             if (ModelState.IsValid)
             {
+                //grab the DependentId and the DoctorId for the current appointment
+                int CurrentAppointmentDependent = appointment.DependentId;
+                int CurrentAppointmentDoctor = appointment.DoctorId;
+
+                //check to see if dependent is already a patient of the doctor on the appointment
+                if(!IsDependentAPatient(CurrentAppointmentDependent, CurrentAppointmentDoctor))
+                {
+                    //Create a new DependentDoctor Entry
+                    DependentDoctor DepDoctor = new DependentDoctor()
+                    {
+                        DependentId = CurrentAppointmentDependent,
+                        DoctorId = CurrentAppointmentDoctor
+                    };
+                    //add new Dependent Doctor to the DB
+                    _context.Add(DepDoctor);
+                    await _context.SaveChangesAsync();
+                }
 
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
