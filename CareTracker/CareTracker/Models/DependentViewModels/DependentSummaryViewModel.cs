@@ -9,10 +9,6 @@ namespace CareTracker.Models.DependentViewModels
     public class DependentSummaryViewModel
     {
         public Dependent Dependent { get; set; }
-
-
-     
-
         public int Age { get; set; }
 
         public IEnumerable<SummaryAppointment> Appointments{ get; set; }

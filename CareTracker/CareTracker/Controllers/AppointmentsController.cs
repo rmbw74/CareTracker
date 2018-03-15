@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using CareTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using CareTracker.Models.AppointmentViewModels;
 
 namespace CareTracker.Controllers
 {
@@ -21,6 +22,9 @@ namespace CareTracker.Controllers
             _context = context;
             _userManager = userManager;
         }
+
+        // This task retrieves the currently authenticated user
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Appointments
         public async Task<IActionResult> Index()
@@ -50,11 +54,12 @@ namespace CareTracker.Controllers
         }
 
         // GET: Appointments/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName");
-            return View();
+            ApplicationUser user = await GetCurrentUserAsync();
+            var model = new AppointmentCreateViewModel(_context, user);
+           
+            return View(model);
         }
 
         // POST: Appointments/Create
@@ -64,14 +69,32 @@ namespace CareTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentTime,AppointmentReason,AppointmentAddress,AppointmentPhoneNumber,AppointmentNotes,DependentId,DoctorId")] Appointment appointment)
         {
+       
             if (ModelState.IsValid)
             {
+                //grab the DependentId and the DoctorId for the current appointment
+                int CurrentAppointmentDependent = appointment.DependentId;
+                int CurrentAppointmentDoctor = appointment.DoctorId;
+
+                //check to see if dependent is already a patient of the doctor on the appointment
+                if(!IsDependentAPatient(CurrentAppointmentDependent, CurrentAppointmentDoctor))
+                {
+                    //Create a new DependentDoctor Entry
+                    DependentDoctor DepDoctor = new DependentDoctor()
+                    {
+                        DependentId = CurrentAppointmentDependent,
+                        DoctorId = CurrentAppointmentDoctor
+                    };
+                    //add new Dependent Doctor to the DB
+                    _context.Add(DepDoctor);
+                    await _context.SaveChangesAsync();
+                }
+
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId","LastName", appointment.DoctorId);
+           
             return View(appointment);
         }
 
@@ -165,5 +188,19 @@ namespace CareTracker.Controllers
         {
             return _context.Appointment.Any(e => e.AppointmentId == id);
         }
+
+        public bool IsDependentAPatient(int _dependentId, int _doctorId )
+        {
+            var IsPatient = _context.DependentDoctor
+                 .Where(DD => DD.DependentId == _dependentId && DD.DoctorId == _doctorId)
+                 .FirstOrDefault();
+
+            if(IsPatient == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
+
 }
