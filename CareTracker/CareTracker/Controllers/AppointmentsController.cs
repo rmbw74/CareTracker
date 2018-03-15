@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using CareTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using CareTracker.Models.AppointmentViewModels;
 
 namespace CareTracker.Controllers
 {
@@ -21,6 +22,9 @@ namespace CareTracker.Controllers
             _context = context;
             _userManager = userManager;
         }
+
+        // This task retrieves the currently authenticated user
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Appointments
         public async Task<IActionResult> Index()
@@ -50,11 +54,13 @@ namespace CareTracker.Controllers
         }
 
         // GET: Appointments/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ApplicationUser user = await GetCurrentUserAsync();
+            var model = new AppointmentCreateViewModel(_context, user);
             ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
             ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName");
-            return View();
+            return View(model);
         }
 
         // POST: Appointments/Create
@@ -64,6 +70,7 @@ namespace CareTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AppointmentId,AppointmentDate,AppointmentTime,AppointmentReason,AppointmentAddress,AppointmentPhoneNumber,AppointmentNotes,DependentId,DoctorId")] Appointment appointment)
         {
+            
             if (ModelState.IsValid)
             {
 
@@ -166,5 +173,19 @@ namespace CareTracker.Controllers
         {
             return _context.Appointment.Any(e => e.AppointmentId == id);
         }
+
+        public bool IsDependentAPatient(int _dependentId, int _doctorId )
+        {
+            var IsPatient = _context.DependentDoctor
+                 .Where(DD => DD.DependentId == _dependentId && DD.DoctorId == _doctorId)
+                 .FirstOrDefault();
+
+            if(IsPatient == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
+
 }
