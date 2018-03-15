@@ -79,8 +79,8 @@
 </table>
 <div class="container container-fluid">
     <div class="form-group">
-        <button id="Summary_ShowAllAppointments_Button" type="button" class="btn btn-info">See All Appointments</button>
-        <button id="Summary_ShowAllDoctors_Button" type="button" class="btn btn-info">See All Doctors</button>
+        <button id="Summary_ShowAllAppointments_Button--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Appointments</button>
+        <button id="Summary_ShowAllDoctors_Button--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Doctors</button>
     </div>
 </div>
 
@@ -142,7 +142,7 @@
 </table>
 <div class="container container-fluid">
     <div class="form-group">
-        <button id="Summary_ShowAllPrescriptions_Button" type="button" class="btn btn-info">See All Prescriptions</button>
+        <button id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
     </div>
 </div>
 
