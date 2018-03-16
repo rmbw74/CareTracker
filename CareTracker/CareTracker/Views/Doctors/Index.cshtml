@@ -15,9 +15,7 @@
     </div>
 </form>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -65,8 +63,7 @@
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.DoctorId">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.DoctorId">Delete</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.DoctorId">Edit</a>
                 </td>
             </tr>
         }
@@ -92,3 +89,10 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
+<div>
+    <p>
+        Can't Find the doctor you are looking for?
+        <a class="btn btn-info" asp-action="Create">Add A Doctor</a>
+    </p>
+</div>
+
