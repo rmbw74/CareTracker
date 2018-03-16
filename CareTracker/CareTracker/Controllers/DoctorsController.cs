@@ -28,13 +28,80 @@ namespace CareTracker.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
 
-        // GET: Doctors
-        public async Task<IActionResult> Index()
+        // GET: Doctors/ShowAll
+        [Authorize]
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View(await _context.Doctor.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParam"] = sortOrder == "name_desc" ? "name" : "name_desc";
+            ViewData["LastNameSortParam"] = sortOrder == "LastName_desc" ? "LastName" : "LastName_desc";
+            ViewData["HospitalSortParam"] = sortOrder == "Hospital_desc" ? "Hospital" : "Hospital_desc";
+            ViewData["SpecialtySortParam"] = sortOrder == "Specialty_desc" ? "Specialty" : "Specialty_desc";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            // define a variable to hold doctors
+            var doctors = from d in _context.Doctor
+                           select d;
+            //check to see if the user has entered anything in seach..
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                //if searchString is not null, check to see if any af the following columns contain the searchString
+                doctors = doctors.Where(d => d.FirstName.Contains(searchString)|| d.LastName.Contains(searchString)
+                                            || d.Hospital.Contains(searchString) || d.Specialty.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    doctors = doctors.OrderByDescending(d => d.FirstName);
+                    break;
+                case "name":
+                    doctors = doctors.OrderBy(d => d.FirstName);
+                    break;
+                case "LastName_desc":
+                    doctors = doctors.OrderByDescending(d => d.LastName);
+                    break;
+                case "LastName":
+                    doctors = doctors.OrderBy(d => d.LastName);
+                    break;
+                case "Hospital_desc":
+                    doctors = doctors.OrderByDescending(d => d.Hospital);
+                    break;
+                case "Hospital":
+                    doctors = doctors.OrderBy(d => d.Hospital);
+                    break;
+                case "Specialty_desc":
+                    doctors = doctors.OrderByDescending(d => d.Specialty);
+                    break;
+                case "Specialty":
+                    doctors = doctors.OrderBy(d => d.Specialty);
+                    break;
+                default:
+                    doctors = doctors.OrderBy(s => s.LastName);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Doctor>.CreateAsync(doctors.AsNoTracking(), page ?? 1, pageSize));
+            //return View(await doctors.AsNoTracking().ToListAsync());
+
+            // return View(await _context.Doctor.ToListAsync());
         }
 
         // GET: Doctors/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,6 +120,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Doctors/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -75,6 +143,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Doctors/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +162,7 @@ namespace CareTracker.Controllers
         // POST: Doctors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DoctorId,FirstName,LastName,Hospital,Specialty,Address,PhoneNumber")] Doctor doctor)
@@ -126,6 +196,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Doctors/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +215,7 @@ namespace CareTracker.Controllers
         }
 
         // POST: Doctors/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

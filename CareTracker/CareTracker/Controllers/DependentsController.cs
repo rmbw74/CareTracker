@@ -9,6 +9,7 @@ using CareTracker.Data;
 using Microsoft.AspNetCore.Identity;
 using CareTracker.Models;
 using CareTracker.Models.DependentViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CareTracker.Controllers
 {
@@ -41,6 +42,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Dependents/Summary/5
+        [Authorize]
         public async Task<IActionResult> Summary(int? id)
         {
             //gets the current user
@@ -53,12 +55,15 @@ namespace CareTracker.Controllers
 
 
         // GET: Dependents
-        public async Task<IActionResult> Index()
+        [Authorize]
+        public IActionResult Index()
         {
-            return View(await _context.Dependent.ToListAsync());
+            //return View(await _context.Dependent.ToListAsync());
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Dependents/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -77,6 +82,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Dependents/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -85,6 +91,7 @@ namespace CareTracker.Controllers
         // POST: Dependents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DependentId,FirstName,LastName,Birthday,SocialSecurityNumber,DependentNotes")] Dependent dependent)
@@ -117,6 +124,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Dependents/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -135,6 +143,7 @@ namespace CareTracker.Controllers
         // POST: Dependents/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DependentId,FirstName,LastName,Birthday,SocialSecurityNumber,DependentNotes")] Dependent dependent)
@@ -168,6 +177,7 @@ namespace CareTracker.Controllers
         }
 
         // GET: Dependents/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -186,6 +196,7 @@ namespace CareTracker.Controllers
         }
 
         // POST: Dependents/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
