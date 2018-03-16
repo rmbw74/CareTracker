@@ -28,17 +28,26 @@ namespace CareTracker.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
 
-        // GET: Doctors
+        // GET: Doctors/ShowAll
         [Authorize]
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParam"] = sortOrder == "name_desc" ? "name" : "name_desc";
             ViewData["LastNameSortParam"] = sortOrder == "LastName_desc" ? "LastName" : "LastName_desc";
             ViewData["HospitalSortParam"] = sortOrder == "Hospital_desc" ? "Hospital" : "Hospital_desc";
             ViewData["SpecialtySortParam"] = sortOrder == "Specialty_desc" ? "Specialty" : "Specialty_desc";
+            ViewData["CurrentFilter"] = searchString;
 
+            // define a variable to hold doctors
             var doctors = from d in _context.Doctor
                            select d;
+            //check to see if the user has entered anything in seach..
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                //if searchString is not null, check to see if any af the following columns contain the searchString
+                doctors = doctors.Where(d => d.FirstName.Contains(searchString)|| d.LastName.Contains(searchString)
+                                            || d.Hospital.Contains(searchString) || d.Specialty.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
