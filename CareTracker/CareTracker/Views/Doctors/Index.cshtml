@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<CareTracker.Models.Doctor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Doctors";
 }
 
-<h2>Index</h2>
+<h2>CareTracker HealthCare Provider List</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,16 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(model => model.FirstName)</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">@Html.DisplayNameFor(model => model.LastName)</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Hospital)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["HospitalSortParam"]">@Html.DisplayNameFor(model => model.Hospital)</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Specialty)
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SpecialtySortParam"]">@Html.DisplayNameFor(model => model.Specialty)</a>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Address)
