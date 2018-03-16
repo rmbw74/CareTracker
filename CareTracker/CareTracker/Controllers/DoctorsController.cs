@@ -30,12 +30,27 @@ namespace CareTracker.Controllers
 
         // GET: Doctors/ShowAll
         [Authorize]
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParam"] = sortOrder == "name_desc" ? "name" : "name_desc";
             ViewData["LastNameSortParam"] = sortOrder == "LastName_desc" ? "LastName" : "LastName_desc";
             ViewData["HospitalSortParam"] = sortOrder == "Hospital_desc" ? "Hospital" : "Hospital_desc";
             ViewData["SpecialtySortParam"] = sortOrder == "Specialty_desc" ? "Specialty" : "Specialty_desc";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             ViewData["CurrentFilter"] = searchString;
 
             // define a variable to hold doctors
@@ -78,7 +93,9 @@ namespace CareTracker.Controllers
                     doctors = doctors.OrderBy(s => s.LastName);
                     break;
             }
-            return View(await doctors.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Doctor>.CreateAsync(doctors.AsNoTracking(), page ?? 1, pageSize));
+            //return View(await doctors.AsNoTracking().ToListAsync());
 
             // return View(await _context.Doctor.ToListAsync());
         }
