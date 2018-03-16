@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CareTracker.Models.Doctor>
+﻿@model PaginatedList<CareTracker.Models.Doctor>
 
 @{
     ViewData["Title"] = "Doctors";
@@ -22,22 +22,22 @@
     <thead>
         <tr>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(model => model.FirstName)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">First Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]">@Html.DisplayNameFor(model => model.LastName)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["LastNameSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Last Name</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["HospitalSortParam"]">@Html.DisplayNameFor(model => model.Hospital)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["HospitalSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Hospital Affiliation</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SpecialtySortParam"]">@Html.DisplayNameFor(model => model.Specialty)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SpecialtySortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Type or Specialty</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    Address
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                   Phone Number
                 </th>
             <th></th>
         </tr>
