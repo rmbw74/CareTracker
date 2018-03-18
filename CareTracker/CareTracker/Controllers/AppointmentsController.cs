@@ -201,6 +201,46 @@ namespace CareTracker.Controllers
             }
             return true;
         }
-    }
+       
+        public async Task<IActionResult> AllAppointments()
+        {
 
+            ApplicationUser user = await GetCurrentUserAsync();
+            var model = new AllAppointmentsViewModel();
+
+
+            model.Appointments = GetDependentAppointments(user);
+                                           
+
+
+                return View(model);
+            
+        }
+            public IEnumerable<DependentAppointment> GetDependentAppointments(ApplicationUser user)
+            {
+            return (from a in _context.Appointment
+                    join doc in _context.Doctor on a.DoctorId equals doc.DoctorId
+                    join d in _context.Dependent on a.DependentId equals d.DependentId
+                    join du in _context.DependentUser on a.DependentId equals du.DependentId
+                    where du.User == user && a.AppointmentDate >= DateTime.Now
+                    select new DependentAppointment
+                    {
+                        AppointmentAddress = a.AppointmentAddress,
+                        AppointmentDate = a.AppointmentDate,
+                        AppointmentId = a.AppointmentId,
+                        AppointmentNotes = a.AppointmentNotes,
+                        AppointmentPhone = a.AppointmentPhoneNumber,
+                        AppointmentReason = a.AppointmentReason,
+                        AppointmentTime = a.AppointmentTime,
+                        DependentId = d.DependentId,
+                        DependentFirstName = d.FirstName,
+                        DependentLastName = d.LastName,
+                        DoctorFirstName = doc.FirstName,
+                        DoctorLastName = doc.LastName,
+                        DoctorId = doc.DoctorId
+
+
+                    }).ToList().OrderBy(x => x.AppointmentDate);
+            }
+    }
 }
