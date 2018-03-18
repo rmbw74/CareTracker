@@ -1,0 +1,46 @@
+﻿@model CareTracker.Models.AppointmentViewModels.AllAppointmentsViewModel
+@{
+    ViewData["Title"] = "AllAppointments";
+
+}
+
+<h2>All Upcoming Appointments</h2>
+
+@foreach(var appointment in Model.Appointments)
+{
+<div class="container container-fluid list-group-item-info col-md-4" id="AppointmentID--@Html.DisplayFor(modelItem => appointment.AppointmentId)">
+    <div class="row">
+        <div class="container col-md-12 AppointmentContainer__Head">
+            @Html.DisplayFor(modelItem => appointment.DependentFirstName)
+            @Html.DisplayFor(modelItem => appointment.DependentLastName)
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="container col-md-2">
+            <p>Dr.@Html.DisplayFor(modelItem => appointment.DoctorLastName)</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container col-md-2">
+            <p>@Html.DisplayFor(modelItem => appointment.AppointmentDate)</p>
+            <p>@Html.DisplayFor(modelItem => appointment.AppointmentTime)</p>
+        </div>
+    </div>
+
+    <div class="container AppointmentButtonContainer">
+        <a class="btn btn-info btn" id="Appointment--@Html.DisplayFor(modelItem => appointment.AppointmentId)" 
+           href="/appointments/Details/@Html.DisplayFor(modelItem => appointment.AppointmentId)">Appointment Details</a>
+    </div>
+</div>
+    
+}
+<div class="row">
+
+</div>
+<div class="contianer container-fluid col-md-12">
+    <a class="btn btn-info" href="/appointments/create">Add New Appointment</a>
+</div>
+
