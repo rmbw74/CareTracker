@@ -16,9 +16,10 @@ namespace CareTracker.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public PrescriptionsController(ApplicationDbContext context)
+        public PrescriptionsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Prescriptions
@@ -164,5 +165,7 @@ namespace CareTracker.Controllers
         {
             return _context.Prescription.Any(e => e.PrescriptionId == id);
         }
+
+        public async 
     }
 }
