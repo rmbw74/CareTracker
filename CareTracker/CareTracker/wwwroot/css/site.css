@@ -40,10 +40,10 @@
     background-color:#428bca;
     color:white;
 }
-.navbar a {
+.navbar a btn {
     color: white;
 }
-/*********************ALLAPOINTMENTS*****************************/
+/*********************ALLAPPOINTMENTS*****************************/
 .AppointmentCard {
     background-color: white;
     border: 1px solid black;

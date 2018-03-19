@@ -95,9 +95,6 @@ namespace CareTracker.Controllers
             }
             int pageSize = 3;
             return View(await PaginatedList<Doctor>.CreateAsync(doctors.AsNoTracking(), page ?? 1, pageSize));
-            //return View(await doctors.AsNoTracking().ToListAsync());
-
-            // return View(await _context.Doctor.ToListAsync());
         }
 
         // GET: Doctors/Details/5
