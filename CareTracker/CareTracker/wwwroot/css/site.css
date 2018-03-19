@@ -36,11 +36,18 @@
     }
 }
 /*********************NAVBAR*****************************/
-#SharedNavbar {
+#SharedNavbar  {
     background-color:#428bca;
     color:white;
 }
-.navbar a btn {
+#logout {
+    color: white;
+}
+.navbar a  {
+    color: white;
+}
+
+.navbar li btn {
     color: white;
 }
 /*********************ALLAPPOINTMENTS*****************************/
