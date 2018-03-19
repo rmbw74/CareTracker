@@ -166,6 +166,31 @@ namespace CareTracker.Controllers
             return _context.Prescription.Any(e => e.PrescriptionId == id);
         }
 
-        public async 
+        public ICollection<DependentPrescription> GetDependentUserPrescriptions (ApplicationDbContext context, ApplicationUser user)
+        {
+            return (from p in context.Prescription
+                    join doc in context.Doctor
+                    on p.DoctorId equals doc.DoctorId
+                    join dep in context.Dependent
+                    on p.DependentId equals dep.DependentId
+                    join du in context.DependentUser
+                    on p.DependentId equals du.DependentId
+                    where du.User == user
+                    select new DependentPrescription
+                    {
+                        DependentFirstName = dep.FirstName,
+                        DependentLastName = dep.LastName,
+                        DependentId = dep.DependentId,
+                        DoctorFirstName = doc.FirstName,
+                        DoctorLastName = doc.LastName,
+                        DoctorId = doc.DoctorId,
+                        PrescriptionId = p.PrescriptionId,
+                        DrugName = p.DrugName,
+                        Dosage = p.Dosage,
+                        Frequency = p.Frequency,
+                        PharmacyPhoneNumber = p.PharmacyPhoneNumber,
+                        PrescriptionActive = p.PrescriptionActive
+                    }).ToList();
+        }
     }
 }
