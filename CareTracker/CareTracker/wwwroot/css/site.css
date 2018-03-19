@@ -26,10 +26,36 @@
     margin: 15px;
 }
 
+
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
     .carousel-caption {
         display: none;
     }
+}
+/*********************NAVBAR*****************************/
+#SharedNavbar {
+    background-color:#428bca;
+    color:white;
+}
+.navbar a {
+    color: white;
+}
+/*********************ALLAPOINTMENTS*****************************/
+.AppointmentCard {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 14px;
+    margin: 3px;
+    box-shadow: -3px 3px 1px 1px #888888;
+}
+#AppointmentGrid {
+    margin-bottom: 5px;
+}
+
+.AppointmentButtonContainer__Button{
+    margin-left: 5px;
+    margin-bottom: 3px;
 }

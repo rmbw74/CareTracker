@@ -92,7 +92,7 @@ namespace CareTracker.Controllers
 
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllAppointments));
             }
            
             return View(appointment);

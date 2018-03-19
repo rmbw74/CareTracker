@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using CareTracker.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@*Author: Ray  Purpose: This template renderes when the user is authenticated and shows the Dependents Affordance in the nav bar*@
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="nav navbar-nav">
+        <li><a asp-area="" asp-controller="Appointments" asp-action="AllAppointments">Appointments</a></li>
+    </ul>
+}
+else
+{
+
+}
