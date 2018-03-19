@@ -1,10 +1,11 @@
-﻿@model IEnumerable<CareTracker.Models.Prescription>
+﻿@model CareTracker.Models.PrescriptionViewModels.DependentAllPrescriptionsViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dependnet Prescription List";
+    var prescriptiontableheaders = Model.DependentPrescriptions.FirstOrDefault();
 }
 
-<h2>Index</h2>
+<h2>Dependent Prescription List</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,70 +13,64 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DrugName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Dosage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Frequency)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PharmacyAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PharmacyPhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PrescriptionNotes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PrescriptionActive)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dependent)
+                @Html.DisplayNameFor(model => prescriptiontableheaders.DependentFirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Doctor)
+                @Html.DisplayNameFor(model => prescriptiontableheaders.DependentLastName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.DoctorLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionActive)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var script in Model.DependentPrescriptions) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DrugName)
+                @Html.DisplayFor(modelItem => script.DependentFirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dosage)
+                @Html.DisplayFor(modelItem => script.DependentLastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Frequency)
+                @Html.DisplayFor(modelItem => script.DrugName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PharmacyAddress)
+                @Html.DisplayFor(modelItem => script.Dosage)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PharmacyPhoneNumber)
+                @Html.DisplayFor(modelItem => script.Frequency)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrescriptionNotes)
+                @Html.DisplayFor(modelItem => script.PharmacyPhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrescriptionActive)
+                <a asp-controller="Doctors" asp-action="Details" asp-route-id="@script.DoctorId">@Html.DisplayFor(modelItem => script.DoctorLastName)</a> 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dependent.FirstName)
+                @Html.DisplayFor(modelItem => script.PrescriptionActive)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Doctor.Address)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrescriptionId">Delete</a>
+                <a class="btn btn-info"asp-action="Details" asp-route-id="@script.PrescriptionId">Details</a>
+                
             </td>
         </tr>
 }

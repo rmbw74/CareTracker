@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using CareTracker.Models;
+using CareTracker.Models.PrescriptionViewModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace CareTracker.Controllers
@@ -22,12 +23,22 @@ namespace CareTracker.Controllers
             _userManager = userManager;
         }
 
+        // This task retrieves the currently authenticated user
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         // GET: Prescriptions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Prescription.Include(p => p.Dependent).Include(p => p.Doctor);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await GetCurrentUserAsync();
+
+            var model = new DependentAllPrescriptionsViewModel();
+
+            model.DependentPrescriptions = GetDependentUserPrescriptions(_context, user);
+            
+            return View(model);
         }
+
+       
 
         // GET: Prescriptions/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -190,7 +201,7 @@ namespace CareTracker.Controllers
                         Frequency = p.Frequency,
                         PharmacyPhoneNumber = p.PharmacyPhoneNumber,
                         PrescriptionActive = p.PrescriptionActive
-                    }).ToList();
+                    }).OrderBy(p => p.DependentId).OrderBy(p => p.PrescriptionActive).ToList();
         }
     }
 }
