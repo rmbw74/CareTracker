@@ -5,10 +5,10 @@
 }
 
 <h2>All Upcoming Appointments</h2>
-
+<div class="container container-fluid"id="AppointmentGrid">
 @foreach(var appointment in Model.Appointments)
 {
-<div class="container container-fluid list-group-item-info col-md-4" id="AppointmentID--@Html.DisplayFor(modelItem => appointment.AppointmentId)">
+<div class="AppointmentCard container container-fluid list-group-item-info col-md-3" id="AppointmentID--@Html.DisplayFor(modelItem => appointment.AppointmentId)">
     <div class="row">
         <div class="container col-md-12 AppointmentContainer__Head">
             @Html.DisplayFor(modelItem => appointment.DependentFirstName)
@@ -30,13 +30,14 @@
         </div>
     </div>
 
-    <div class="container AppointmentButtonContainer">
-        <a class="btn btn-info btn" id="Appointment--@Html.DisplayFor(modelItem => appointment.AppointmentId)" 
+    <div class="row AppointmentButtonContainer">
+        <a class="btn btn-info AppointmentButtonContainer__Button" id="Appointment--@Html.DisplayFor(modelItem => appointment.AppointmentId)" 
            href="/appointments/Details/@Html.DisplayFor(modelItem => appointment.AppointmentId)">Appointment Details</a>
     </div>
 </div>
     
 }
+</div>
 <div class="row">
 
 </div>
