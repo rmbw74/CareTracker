@@ -61,11 +61,12 @@ namespace CareTracker.Controllers
         }
 
         // GET: Prescriptions/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName");
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId","LastName");
-            return View();
+            ApplicationUser user = await GetCurrentUserAsync();
+            var model = new PrescriptionCreateViewModel(_context, user);
+
+            return View(model);
         }
 
         // POST: Prescriptions/Create
