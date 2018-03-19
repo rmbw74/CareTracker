@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CareTracker.Data;
 using CareTracker.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CareTracker.Controllers
 {
     public class PrescriptionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public PrescriptionsController(ApplicationDbContext context)
         {
