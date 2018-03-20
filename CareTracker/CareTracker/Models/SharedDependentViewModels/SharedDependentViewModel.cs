@@ -11,10 +11,12 @@ namespace CareTracker.Models.SharedDependentViewModels
     public class SharedDependentViewModel
     {
         public ICollection<SharedDependentListItem> DependentsShared { get; set; }
+        [Display(Name = "Who Do You Want To Share?")]
         public List<SelectListItem> DependentList { get; set; }
         
+        [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "User Email")]
+        [Display(Name = "Email Of User You Wish To Share With?")]
         public string ToUserEmail { get; set; }
 
         public SharedDependentViewModel(ApplicationUser user, ApplicationDbContext ctx)

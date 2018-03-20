@@ -66,16 +66,23 @@ namespace CareTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SharedDependentId,DependentUserId")] SharedDependent sharedDependent)
+        public async Task<IActionResult> Create (string ToUserEmail, int DependentUserId)
         {
+            //string normalized = ToUserEmail.ToUpper();
+            ApplicationUser toUser = await _context.Users.Where(u => u.UserName == ToUserEmail).FirstOrDefaultAsync();
+
+            var SharedDependent = new SharedDependent
+            {
+                ToUser = toUser,
+                DependentUserId = DependentUserId
+            };
             if (ModelState.IsValid)
             {
-                _context.Add(sharedDependent);
+                _context.Add(SharedDependent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DependentUserId"] = new SelectList(_context.DependentUser, "DependentUserId", "UserId", sharedDependent.DependentUserId);
-            return View(sharedDependent);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: SharedDependents/Edit/5
