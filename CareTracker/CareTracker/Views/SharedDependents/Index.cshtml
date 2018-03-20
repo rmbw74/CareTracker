@@ -10,20 +10,21 @@
 </p>
 @if (Model.DependentsShared.Count > 0)
 {
-    <h2>Here are some dependents that other users wish to share with you.</h2>
+    <h4>Here are some dependents that other users wish to share with you.</h4>
     foreach (SharedDependentListItem item in Model.DependentsShared)
     {
         <p>@Html.DisplayFor(ModelItem => item.FromUserName) wants to share </p>
         <p>@Html.DisplayFor(ModelItem => item.FirstName) with you</p>
-        <a class="btn btn-success">Accept</a>
-        <a class="btn btn-danger">Reject</a>
+        <a class="btn btn-success" id="AcceptShare--@Html.DisplayFor(ModelItem => item.SharedDependentId)">Accept</a>
+        <a class="btn btn-danger" id="RejectShare--@Html.DisplayFor(ModelItem => item.SharedDependentId)">Reject</a>
     }
 }
 else
 {
-    <p> No Shared Dependnents, you may share one below</p>
+    <h4> No Shared Dependnents, you may share one below</h4>
 
 }
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

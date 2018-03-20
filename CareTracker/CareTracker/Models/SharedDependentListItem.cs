@@ -20,5 +20,7 @@ namespace CareTracker.Models
         public string FromUserName { get; set; }
 
         public string FromUserEmail { get; set; }
+
+        public int SharedDependentId { get; set; }
     }
 }

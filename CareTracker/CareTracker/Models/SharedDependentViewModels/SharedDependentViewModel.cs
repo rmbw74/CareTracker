@@ -32,7 +32,8 @@ namespace CareTracker.Models.SharedDependentViewModels
                                                         LastName = d.LastName,
                                                         Birthday = d.Birthday,
                                                         FromUserName = du.User.FirstName,
-                                                        FromUserEmail = du.User.UserName
+                                                        FromUserEmail = du.User.UserName,
+                                                        SharedDependentId = sd.SharedDependentId
                                                     }).ToList();
 
 
