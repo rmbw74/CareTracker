@@ -1,0 +1,52 @@
+﻿@model CareTracker.Models.SharedDependentViewModels.SharedDependentViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (Model.DependentsShared.Count > 0)
+{
+    <h2>Here are some dependents that other users wish to share with you.</h2>
+    foreach (SharedDependentListItem item in Model.DependentsShared)
+    {
+        <p>@Html.DisplayFor(ModelItem => item.FromUserName) wants to share </p>
+        <p>@Html.DisplayFor(ModelItem => item.FirstName) with you</p>
+        <a class="btn btn-success">Accept</a>
+        <a class="btn btn-danger">Reject</a>
+    }
+}
+else
+{
+    <p> No Shared Dependnents, you may share one below</p>
+
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ToUserEmail" class="control-label"></label>
+                <input asp-for="ToUserEmail" class="form-control" />
+                <span asp-validation-for="ToUserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DependentList)
+                @Html.DropDownList(
+           "Dependent.DependentId",
+           @Model.DependentList,
+          new
+          {
+              @name = "Dependent.DependentId",
+              @class = "form-control"
+          }
+          )
+                @Html.ValidationMessageFor(model => model.DependentList, "", new { @class = "text-danger" })
+            </div>
+        </form>
+    </div>
+</div>
+
