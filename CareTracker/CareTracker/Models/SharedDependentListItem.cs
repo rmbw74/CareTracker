@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace CareTracker.Models
 {
-    public class UserDependent
+    public class SharedDependentListItem
     {
-        public int DependentUserId { get; set; }
         public int DependentId { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
+
+        public string FromUserName { get; set; }
+
+        public string FromUserEmail { get; set; }
+
+        public int SharedDependentId { get; set; }
     }
 }
