@@ -23,12 +23,14 @@ namespace CareTracker.Controllers
             _context = context;
         }
 
-        public IEnumerable<SummaryAppointment> GetSummaryAppointments(int id)
+        public ICollection<SummaryAppointment> GetSummaryAppointments(int id)
         {
             return (from a in _context.Appointment
                     join d in _context.Doctor
                     on a.DoctorId equals d.DoctorId
                     where a.DependentId == id && a.AppointmentDate >= DateTime.Now
+                    orderby a.AppointmentDate
+                    
                     select new SummaryAppointment
                     {
                         AppointmentId = a.AppointmentId,
@@ -38,10 +40,10 @@ namespace CareTracker.Controllers
                         AppointmentDoctor = d.LastName,
                         AppointmentPhoneNum = a.AppointmentPhoneNumber,
                         AppointmentDoctorId = d.DoctorId
-                    }).ToList().OrderBy(a => a.AppointmentDate).Take(3);
+                    }).Take(3).ToList();
         }
 
-        public IEnumerable<SummaryPrescription> GetSummaryPrescriptions(int id)
+        public ICollection<SummaryPrescription> GetSummaryPrescriptions(int id)
         {
             return (from p in _context.Prescription
                     join d in _context.Doctor

@@ -23,126 +23,152 @@
 <a></a>
 
 
+@if (Model.Appointments.Count > 0)
+{
+    <h4>Here are @Html.DisplayFor(model => model.Dependent.FirstName)'s Three Upcoming Appointments</h4>
 
 
-<h4>Here are @Html.DisplayFor(model => model.Dependent.FirstName)'s Three Upcoming Appointments</h4>
-
-
-<table id="SummaryAppointmentTable" class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentReason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentPhoneNum)
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var appointment in Model.Appointments)
-        {
+    <table id="SummaryAppointmentTable" class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => appointment.AppointmentDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => appointment.AppointmentTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => appointment.AppointmentReason)
-                </td>
-                <td>
-                    <a asp-controller="doctors" asp-action="Details" asp-route-id="@appointment.AppointmentDoctorId">@Html.DisplayFor(modelItem => appointment.AppointmentDoctor)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => appointment.AppointmentPhoneNum)
-                </td>
-                <td>
-                    <a class="btn btn-info"asp-controller="Appointments" asp-action="Details" asp-route-id="@appointment.AppointmentId">Details</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentReason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentDoctor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentPhoneNum)
+                </th>
+                <th>
+                </th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model.Appointments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => appointment.AppointmentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => appointment.AppointmentTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => appointment.AppointmentReason)
+                    </td>
+                    <td>
+                        <a asp-controller="doctors" asp-action="Details" asp-route-id="@appointment.AppointmentDoctorId">@Html.DisplayFor(modelItem => appointment.AppointmentDoctor)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => appointment.AppointmentPhoneNum)
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-controller="Appointments" asp-action="Details" asp-route-id="@appointment.AppointmentId">Details</a>
+                    </td>
+                </tr>
 
-        }
-    </tbody>
-</table>
-<div id="AppointmentActionBar" class="container container-fluid">
-    <div class="form-group">
-        <button id="Summary_ShowAllAppointments_Button--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Appointments</button>
-        <button id="Doctors--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="SeeAllDoctorsButton btn btn-info">See All Doctors</button>
+            }
+        </tbody>
+    </table>
+    <div id="AppointmentActionBar" class="container container-fluid">
+        <div class="form-group">
+            <button id="Summary_ShowAllAppointments_Button--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Appointments</button>
+            <button id="Doctors--@Html.DisplayFor(modelItem => Model.Dependent.DependentId)" type="button" class="SeeAllDoctorsButton btn btn-info">See All Doctors</button>
+        </div>
     </div>
-</div>
 
+}
+else
+{
+    <div class="container SummaryNoAppointments">
+        <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no appointments scheduled.</h4>
+        <a class="btn btn-info" asp-controller="Appointments" asp-action="Create">Add Appointment</a>
+    </div>
+    
 
-<h4>Here are @Html.DisplayFor(model => model.Dependent.FirstName)'s Current Prescriptions</h4>
+}
 
-<table id="SummaryPrescriptionTable" class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.PrescribingDoctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var prescription in Model.Prescriptions)
-        {
+@if (Model.Prescriptions.Count > 0)
+{
+    <h4>Here are @Html.DisplayFor(model => model.Dependent.FirstName)'s Current Prescriptions</h4>
+
+    <table id="SummaryPrescriptionTable" class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => prescription.DrugName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => prescription.Dosage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => prescription.Frequency)
-                </td>
-                <td>
-                    <a asp-controller="Doctors" asp-action="details" asp-route-id="@prescription.DoctorId">@Html.DisplayFor(modelItem => prescription.PrescribingDoctor)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => prescription.PrescriptionNotes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => prescription.PharmacyPhoneNumber)
-                </td>
-                <td>
-                    <a asp-controller="Prescriptions" asp-action="Details" asp-route-id="@prescription.PrescriptionId">Details</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.PrescribingDoctor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionNotes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
+                </th>
+                <th>
+                </th>
             </tr>
-        }
-</table>
-<div class="container container-fluid">
-    <div class="form-group">
-        <button id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
+        </thead>
+        <tbody>
+            @foreach (var prescription in Model.Prescriptions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => prescription.DrugName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => prescription.Dosage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => prescription.Frequency)
+                    </td>
+                    <td>
+                        <a asp-controller="Doctors" asp-action="details" asp-route-id="@prescription.DoctorId">@Html.DisplayFor(modelItem => prescription.PrescribingDoctor)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => prescription.PrescriptionNotes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => prescription.PharmacyPhoneNumber)
+                    </td>
+                    <td>
+                        <a asp-controller="Prescriptions" asp-action="Details" asp-route-id="@prescription.PrescriptionId">Details</a>
+                    </td>
+                </tr>
+            }
+    </table>
+    <div class="container container-fluid">
+        <div class="form-group">
+            <button id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
+        </div>
     </div>
-</div>
+
+
+
+}
+else
+{
+
+    <div class=" container SummaryNoPrescriptions">
+        <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no current Prescriptions.</h4>
+        <a class="btn btn-info" asp-controller="Prescriptions" asp-action="Create">Add Prescription</a>
+    </div>
+}
+
+
 
