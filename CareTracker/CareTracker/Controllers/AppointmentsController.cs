@@ -208,6 +208,7 @@ namespace CareTracker.Controllers
 
             model.Appointments = GetSingleDependentAppointments(id);
 
+
             return View(model);
         }
        
