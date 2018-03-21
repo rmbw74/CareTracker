@@ -22,19 +22,19 @@ namespace CareTracker.Models.SharedDependentViewModels
         public SharedDependentViewModel(ApplicationUser user, ApplicationDbContext ctx)
         {
             this.DependentsShared = (from sd in ctx.SharedDependent
-                                                    join du in ctx.DependentUser on sd.DependentUserId equals du.DependentUserId
-                                                    join d in ctx.Dependent on du.DependentId equals d.DependentId
-                                                    where sd.ToUser == user
-                                                    select new SharedDependentListItem
-                                                    {
-                                                        DependentId = d.DependentId,
-                                                        FirstName = d.FirstName,
-                                                        LastName = d.LastName,
-                                                        Birthday = d.Birthday,
-                                                        FromUserName = du.User.FirstName,
-                                                        FromUserEmail = du.User.UserName,
-                                                        SharedDependentId = sd.SharedDependentId
-                                                    }).ToList();
+                                     join du in ctx.DependentUser on sd.DependentUserId equals du.DependentUserId
+                                     join d in ctx.Dependent on du.DependentId equals d.DependentId
+                                      where sd.ToUser == user
+                                      select new SharedDependentListItem
+                                       {
+                                         DependentId = d.DependentId,
+                                         FirstName = d.FirstName,
+                                         LastName = d.LastName,
+                                         Birthday = d.Birthday,
+                                         FromUserName = du.User.FirstName,
+                                         FromUserEmail = du.User.UserName,
+                                         SharedDependentId = sd.SharedDependentId
+                                         }).ToList();
 
 
 
@@ -57,6 +57,12 @@ namespace CareTracker.Models.SharedDependentViewModels
                                      Value = li.DependentId.ToString()
                                  })
                                  .ToList();
+
+            this.DependentList.Insert(0, new SelectListItem
+            {
+                Text = "Choose Dependent...",
+                Value = "0"
+            });
         }
     }
 }

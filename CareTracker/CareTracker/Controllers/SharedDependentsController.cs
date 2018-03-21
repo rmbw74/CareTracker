@@ -71,18 +71,22 @@ namespace CareTracker.Controllers
             //string normalized = ToUserEmail.ToUpper();
             ApplicationUser toUser = await _context.Users.Where(u => u.UserName == ToUserEmail).FirstOrDefaultAsync();
 
+           
+
             var SharedDependent = new SharedDependent
             {
                 ToUser = toUser,
                 DependentUserId = DependentId
             };
-            if (ModelState.IsValid)
+            if (toUser == null)
             {
-                _context.Add(SharedDependent);
-                await _context.SaveChangesAsync();
+                ModelState.AddModelError("ToUserEmail", "That User Does Not Exist");
                 return RedirectToAction(nameof(Index));
             }
+            _context.Add(SharedDependent);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: SharedDependents/Edit/5
