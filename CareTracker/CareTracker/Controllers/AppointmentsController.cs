@@ -201,6 +201,15 @@ namespace CareTracker.Controllers
             }
             return true;
         }
+
+        public IActionResult DependentAppointments (int id)
+        {
+            var model = new DependentAppointmentViewModel();
+
+            model.Appointments = GetSingleDependentAppointments(id);
+
+            return View(model);
+        }
        
         public async Task<IActionResult> AllAppointments()
         {
@@ -209,14 +218,14 @@ namespace CareTracker.Controllers
             var model = new AllAppointmentsViewModel();
 
 
-            model.Appointments = GetDependentAppointments(user);
+            model.Appointments = GetAllUserDependentAppointments(user);
                                            
 
 
                 return View(model);
             
         }
-            public IEnumerable<DependentAppointment> GetDependentAppointments(ApplicationUser user)
+            public IEnumerable<DependentAppointment> GetAllUserDependentAppointments(ApplicationUser user)
             {
             return (from a in _context.Appointment
                     join doc in _context.Doctor on a.DoctorId equals doc.DoctorId
@@ -242,5 +251,31 @@ namespace CareTracker.Controllers
 
                     }).ToList().OrderBy(x => x.AppointmentDate);
             }
+            
+            public ICollection<DependentAppointment> GetSingleDependentAppointments(int id)
+             {
+            return (from a in _context.Appointment
+                    join doc in _context.Doctor on a.DoctorId equals doc.DoctorId
+                    join d in _context.Dependent on a.DependentId equals d.DependentId
+                    where d.DependentId == id
+                    orderby a.AppointmentDate
+                    select new DependentAppointment
+                    {
+                     DependentFirstName = d.FirstName,
+                     DependentLastName = d.LastName,
+                     DependentId = d.DependentId,
+                     AppointmentDate = a.AppointmentDate,
+                     AppointmentAddress = a.AppointmentAddress,
+                     AppointmentId = a.AppointmentId,
+                     AppointmentNotes = a.AppointmentNotes,
+                     AppointmentPhone = a.AppointmentPhoneNumber,
+                     AppointmentReason = a.AppointmentReason,
+                     AppointmentTime = a.AppointmentTime,
+                     DoctorFirstName = doc.FirstName,
+                     DoctorLastName = doc.LastName,
+                     DoctorId = doc.DoctorId
+                    }).ToList();
+
+             }
     }
 }
