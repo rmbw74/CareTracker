@@ -11,8 +11,8 @@ namespace CareTracker.Models.DependentViewModels
         public Dependent Dependent { get; set; }
         public int Age { get; set; }
 
-        public IEnumerable<SummaryAppointment> Appointments{ get; set; }
-        public IEnumerable<SummaryPrescription> Prescriptions { get; set; }
+        public ICollection<SummaryAppointment> Appointments{ get; set; }
+        public ICollection<SummaryPrescription> Prescriptions { get; set; }
 
     
 
