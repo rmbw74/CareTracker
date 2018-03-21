@@ -9,6 +9,7 @@ namespace CareTracker.Models
     public class UserDependent
     {
         public int DependentUserId { get; set; }
+        public int DependentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [DataType(DataType.Date)]

@@ -41,3 +41,27 @@ $("#AppointmentActionBar").on("click", evt => {
     
     
 })
+
+//This eventlistener fires off when a user clicks on a shared user in the share tab
+$("#SharedUserGrid").on("click", evt => {
+    console.log("You Clicked")
+    //split the id of the target click on --
+    const SharedDependentId = evt.target.id.split("--")[1]
+    const target = evt.target.id.split("--")[0]
+    console.log("We clicked on", target + " " + SharedDependentId)
+    if (target !== null)
+    {
+        if (target === "AcceptShare") {
+            console.log(target)
+            window.location = `/SharedDependents/AcceptShare/${SharedDependentId}`
+        } else if (target === "RejectShare")
+        {
+            console.log(target)
+            window.location = `/SharedDependents/RejectShare/${SharedDependentId}`
+        }
+
+    }
+
+    console.log(target)
+
+})

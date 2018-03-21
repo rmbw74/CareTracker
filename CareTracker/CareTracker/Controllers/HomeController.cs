@@ -32,10 +32,12 @@ namespace CareTracker.Controllers
                     where du.User == User
                     select new UserDependent
                     {
+                        DependentId = d.DependentId,
                         DependentUserId = du.DependentUserId,
                         FirstName = d.FirstName,
                         LastName = d.LastName,
-                        Birthday = d.Birthday
+                        Birthday = d.Birthday,
+                        
                     }).ToList();
         }
 

@@ -66,7 +66,7 @@ namespace CareTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (string ToUserEmail, int DependentUserId)
+        public async Task<IActionResult> Create (string ToUserEmail, int DependentId)
         {
             //string normalized = ToUserEmail.ToUpper();
             ApplicationUser toUser = await _context.Users.Where(u => u.UserName == ToUserEmail).FirstOrDefaultAsync();
@@ -74,7 +74,7 @@ namespace CareTracker.Controllers
             var SharedDependent = new SharedDependent
             {
                 ToUser = toUser,
-                DependentUserId = DependentUserId
+                DependentUserId = DependentId
             };
             if (ModelState.IsValid)
             {
@@ -172,5 +172,45 @@ namespace CareTracker.Controllers
         {
             return _context.SharedDependent.Any(e => e.SharedDependentId == id);
         }
+
+        public async Task<IActionResult> AcceptShare(int id)
+        {
+            ApplicationUser user = await GetCurrentUserAsync();
+            SharedDependent remove = await _context.SharedDependent
+                                                    .Where(sd => sd.DependentUserId == id && sd.ToUser == user)
+                                                    .SingleOrDefaultAsync();
+            DependentUser DependentUser = new DependentUser
+            {
+                DependentId = id,
+                User = user,
+
+            };
+            _context.Add(DependentUser);
+            await _context.SaveChangesAsync();
+
+            _context.Remove(remove);
+            await _context.SaveChangesAsync();
+
+
+
+            // SharedDependent Remove =  RemoveFromShareTable(id);
+            //return RedirectToAction("RemoveShared", new { id = id });
+            return RedirectToAction(nameof(Index));
+
+        }
+        
+        public async Task<IActionResult> RejectShare(int id)
+        {
+            SharedDependent DeleteShare = await _context.SharedDependent
+                                                        .Where(d => d.SharedDependentId == id)
+                                                        .SingleOrDefaultAsync();
+            _context.Remove(DeleteShare);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+ 
+        
+        
     }
 }
