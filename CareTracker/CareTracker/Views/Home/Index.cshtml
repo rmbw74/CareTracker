@@ -1,39 +1,48 @@
 ﻿@model CareTracker.Models.DependentViewModels.ViewDependentsHomePageViewModel
 
 @{
-    
+
 }
 
 @if (!User.Identity.IsAuthenticated)
-    {
-        <h1 Id="HomePage_unauthenticated">Welcome To CareTracker, Please register or login to continue.</h1>
-    }
+{
+    
+<div class="jumbotron">
+    <h1 Id="HomePage_unauthenticated">CareTracker</h1>
+    <h3>Because caring should be a group effort!</h3>
+    <div class="text-center">
+        <p><a class="btn btn-primary btn-lg" asp-area="" asp-controller="Account" asp-action="Register">Register</a> <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Account" asp-action="Login">Login</a></p>
+    </div>
+    
+
+</div>
+}
 else
-    {
-    
-        var tableheaders = Model.UserDependents.FirstOrDefault();
-    
+{
+
+    var tableheaders = Model.UserDependents.FirstOrDefault();
+
     <div id="UserDependentList" class="container container-fluid">
 
         @if (User.Identity.IsAuthenticated)
 
-         {
+        {
             @if (Model.UserDependents.Count > 0)
-             {
-   
-        
+            {
+
+
                 @foreach (var userdependent in Model.UserDependents)
-                 {
-                      
-                            <div class="col-sm-2 UserDependentList__Dependent"
-                                 id="dependent--@Html.DisplayFor(modelItem => userdependent.DependentId)">
-                                 <h2 class="UserDependentList__DependentFirstName">@Html.DisplayFor(modelItem => userdependent.FirstName)</h2>
-                                 <h3 class="UserDependentList__DependentLastName">@Html.DisplayFor(modelItem => userdependent.LastName)</h3>
-                                 <h4>@Html.DisplayFor(modelItem => userdependent.Birthday)</h4>
-                            </div>
-                       
-                  }
-        
+                {
+
+                    <div class="col-sm-2 UserDependentList__Dependent"
+                         id="dependent--@Html.DisplayFor(modelItem => userdependent.DependentId)">
+                        <h2 class="UserDependentList__DependentFirstName">@Html.DisplayFor(modelItem => userdependent.FirstName)</h2>
+                        <h3 class="UserDependentList__DependentLastName">@Html.DisplayFor(modelItem => userdependent.LastName)</h3>
+                        <h4>@Html.DisplayFor(modelItem => userdependent.Birthday)</h4>
+                    </div>
+
+                }
+
 
             }
             else
@@ -41,7 +50,7 @@ else
                 <h2>You don't have and dependents, please add some!</h2>
             }
 
-}
+        }
 
 
     </div>
