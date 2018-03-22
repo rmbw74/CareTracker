@@ -75,4 +75,5 @@
     background-image: url("../images/JumbotronBackground.jpg");
     background-size:cover;
     color: white;
+    min-height: 500px;
 }
