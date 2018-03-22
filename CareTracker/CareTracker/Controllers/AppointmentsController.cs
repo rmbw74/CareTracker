@@ -27,10 +27,10 @@ namespace CareTracker.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Appointments
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Appointment.Include(a => a.Dependent).Include(a => a.Doctor);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.Appointment.Include(a => a.Dependent).Include(a => a.Doctor);
+            return Redirect("/Appointments/AllAppointments");
         }
 
         // GET: Appointments/Details/5
@@ -101,19 +101,21 @@ namespace CareTracker.Controllers
         // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var model = new EditAppointmentsViewModel();
             if (id == null)
             {
                 return NotFound();
             }
 
             var appointment = await _context.Appointment.SingleOrDefaultAsync(m => m.AppointmentId == id);
+            
             if (appointment == null)
             {
                 return NotFound();
             }
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName", appointment.DoctorId);
-            return View(appointment);
+            model.Appointment = appointment;
+            
+            return View(model);
         }
 
         // POST: Appointments/Edit/5
@@ -148,8 +150,7 @@ namespace CareTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", appointment.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "Address", appointment.DoctorId);
+            
             return View(appointment);
         }
 
