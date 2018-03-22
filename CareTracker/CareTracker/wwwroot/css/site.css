@@ -77,3 +77,8 @@
     color: white;
     min-height: 500px;
 }
+
+.vertical-center {
+   
+    margin: 0 auto;
+}
