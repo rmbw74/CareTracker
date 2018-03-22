@@ -70,3 +70,9 @@
 .notes {
     height: 100px;
 }
+
+.jumbotron {
+    background-image: url("../images/JumbotronBackground.jpg");
+    background-size:cover;
+    color: white;
+}
