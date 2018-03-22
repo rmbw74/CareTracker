@@ -1,4 +1,4 @@
-﻿@model CareTracker.Models.Prescription
+﻿@model CareTracker.Models.PrescriptionViewModels.PrescriptionEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,51 +6,54 @@
 
 <h2>Edit</h2>
 
-<h4>Prescription</h4>
+<h4>Prescription for @Html.DisplayFor(ModelItem => Model.Prescription.Dependent.FirstName)</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PrescriptionId" />
+            <input type="hidden" asp-for="Prescription.PrescriptionId" />
+            <input type="hidden" asp-for="Prescription.DoctorId" />
+            <input type="hidden" asp-for="Prescription.DependentId" />
+
             <div class="form-group">
-                <label asp-for="DrugName" class="control-label"></label>
-                <input asp-for="DrugName" class="form-control" />
-                <span asp-validation-for="DrugName" class="text-danger"></span>
+                <label asp-for="Prescription.DrugName" class="control-label"></label>
+                <input asp-for="Prescription.DrugName" class="form-control" />
+                <span asp-validation-for="Prescription.DrugName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" />
-                <span asp-validation-for="Dosage" class="text-danger"></span>
+                <label asp-for="Prescription.Dosage" class="control-label"></label>
+                <input asp-for="Prescription.Dosage" class="form-control" />
+                <span asp-validation-for="Prescription.Dosage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Frequency" class="control-label"></label>
-                <input asp-for="Frequency" class="form-control" />
-                <span asp-validation-for="Frequency" class="text-danger"></span>
+                <label asp-for="Prescription.Frequency" class="control-label"></label>
+                <input asp-for="Prescription.Frequency" class="form-control" />
+                <span asp-validation-for="Prescription.Frequency" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PharmacyAddress" class="control-label"></label>
-                <input asp-for="PharmacyAddress" class="form-control" />
-                <span asp-validation-for="PharmacyAddress" class="text-danger"></span>
+                <label asp-for="Prescription.PharmacyAddress" class="control-label"></label>
+                <input asp-for="Prescription.PharmacyAddress" class="form-control" />
+                <span asp-validation-for="Prescription.PharmacyAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PharmacyPhoneNumber" class="control-label"></label>
-                <input asp-for="PharmacyPhoneNumber" class="form-control" />
-                <span asp-validation-for="PharmacyPhoneNumber" class="text-danger"></span>
+                <label asp-for="Prescription.PharmacyPhoneNumber" class="control-label"></label>
+                <input asp-for="Prescription.PharmacyPhoneNumber" class="form-control" />
+                <span asp-validation-for="Prescription.PharmacyPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrescriptionNotes" class="control-label"></label>
-                <input asp-for="PrescriptionNotes" class="form-control" />
-                <span asp-validation-for="PrescriptionNotes" class="text-danger"></span>
+                <label asp-for="Prescription.PrescriptionNotes" class="control-label"></label>
+                <input asp-for="Prescription.PrescriptionNotes" class="form-control" />
+                <span asp-validation-for="Prescription.PrescriptionNotes" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="PrescriptionActive" /> @Html.DisplayNameFor(model => model.PrescriptionActive)
+                        <input asp-for="Prescription.PrescriptionActive" /> @Html.DisplayNameFor(ModelItem => Model.Prescription.PrescriptionActive)
                     </label>
                 </div>
             </div>
-           
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

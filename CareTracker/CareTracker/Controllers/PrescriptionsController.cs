@@ -100,9 +100,9 @@ namespace CareTracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["DependentId"] = new SelectList(_context.Dependent, "DependentId", "FirstName", prescription.DependentId);
-            ViewData["DoctorId"] = new SelectList(_context.Doctor, "DoctorId", "LastName", prescription.DoctorId);
-            return View(prescription);
+            var model = new PrescriptionEditViewModel();
+            model.Prescription = prescription;
+            return View(model);
         }
 
         // POST: Prescriptions/Edit/5
