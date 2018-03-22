@@ -3,20 +3,26 @@
 @{
     ViewData["Title"] = "Doctors";
 }
-
-<h2>CareTracker HealthCare Provider List</h2>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Search Out Provider List: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>CareTracker HealthCare Provider List</h2>
     </div>
-</form>
+    <div class="panel-body">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Search Our Provider List: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-info" /> 
+                    <a class="btn btn-info"asp-action="Index">Clear Search Filter</a>
+                </p>
+            </div>
+        </form>
+    </div>
+    
+</div>
 
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -89,10 +95,8 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
-<div>
-    <p>
-        Can't Find the doctor you are looking for?
+<hr />
+<div class="panel-footer">
         <a class="btn btn-info" asp-action="Create">Add A Doctor</a>
-    </p>
 </div>
 
