@@ -4,77 +4,84 @@
     ViewData["Title"] = "Dependnet Prescription List";
     var prescriptiontableheaders = Model.DependentPrescriptions.FirstOrDefault();
 }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>Dependent Prescription List</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.DependentFirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.DependentLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.DoctorLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionActive)
+                    </th>
 
-<h2>Dependent Prescription List</h2>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var script in Model.DependentPrescriptions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.DependentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.DependentLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.DrugName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.Dosage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.Frequency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.PharmacyPhoneNumber)
+                    </td>
+                    <td>
+                        <a asp-controller="Doctors" asp-action="Details" asp-route-id="@script.DoctorId">@Html.DisplayFor(modelItem => script.DoctorLastName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => script.PrescriptionActive)
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@script.PrescriptionId">Edit</a>
+
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-info" asp-action="Create">Add Prescription</a>
+    </div>
+</div>
 
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.DependentFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.DependentLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.DoctorLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionActive)
-            </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var script in Model.DependentPrescriptions) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => script.DependentFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.DependentLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.DrugName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.Dosage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.Frequency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.PharmacyPhoneNumber)
-            </td>
-            <td>
-                <a asp-controller="Doctors" asp-action="Details" asp-route-id="@script.DoctorId">@Html.DisplayFor(modelItem => script.DoctorLastName)</a> 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => script.PrescriptionActive)
-            </td>
-            <td>
-                <a class="btn btn-info"asp-action="Edit" asp-route-id="@script.PrescriptionId">Edit</a>
-                
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 
-<p>
-    <a  class="btn btn-info"asp-action="Create">Add Prescription</a>
-</p>
