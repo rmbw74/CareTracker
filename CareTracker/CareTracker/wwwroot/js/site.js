@@ -29,18 +29,21 @@ $("#AppointmentActionBar").on("click", evt => {
 
     //split the target id and grab the dependentid
     const DependentId = evt.target.id.split("--")[1]
-    const Target = evt.target.classList
-    console.log(Target)
+    const target = evt.target.id.split("--")[0]
+    console.log(target)
     console.log(evt.target.id)
-    if (DependentId) {
-        console.log("We made it")
-        
-        window.location = `/Doctors/DependentDoctors/${DependentId}`
+    if (target !== null) {
+        if (target === "AllDependentAppointments") {
+            console.log(target)
+            window.location = `/Appointments/DependentAppointments/${DependentId}`
+        } else if (target === "Doctors") {
+            console.log(target)
+            window.location = `/Doctors/DependentDoctors/${DependentId}`
+        }
     }
-    
-    
-    
 })
+
+   
 
 //This eventlistener fires off when a user clicks on a shared user in the share tab
 $("#SharedUserGrid").on("click", evt => {

@@ -207,6 +207,7 @@ namespace CareTracker.Controllers
             var model = new DependentAppointmentViewModel();
 
             model.Appointments = GetSingleDependentAppointments(id);
+            model.Dependent = _context.Dependent.Where(d => d.DependentId == id).FirstOrDefault();
 
 
             return View(model);
