@@ -59,12 +59,8 @@
 }
 }
 /*********************ALLAPPOINTMENTS*****************************/
-.AppointmentCard {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 14px;
-    margin: 3px;
-    box-shadow: -3px 3px 1px 1px #888888;
+.appointmentcard {
+   
 }
 #AppointmentGrid {
     margin-bottom: 5px;

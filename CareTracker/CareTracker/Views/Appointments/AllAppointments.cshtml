@@ -1,46 +1,46 @@
 ﻿@model CareTracker.Models.AppointmentViewModels.AllAppointmentsViewModel
 @{
-    ViewData["Title"] = "AllAppointments";
+    ViewData["Title"] = "All Appointments";
 
 }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>All Upcoming Appointments</h2>
+    </div>
+    <div class="panel-body" id="AppointmentGrid">
+        @foreach (var appointment in Model.Appointments)
+        {
+        <div class="appointmentcard">
+            <div class="panel-info" id="AppointmentID--@Html.DisplayFor(modelItem => appointment.AppointmentId)">
+                <div class="panel-heading">
+                    @Html.DisplayFor(modelItem => appointment.DependentFirstName)
+                    @Html.DisplayFor(modelItem => appointment.DependentLastName)
+                    Has an appointment with:
+                </div>
+                <div class="panel-body">
+                    <p>Dr.@Html.DisplayFor(modelItem => appointment.DoctorLastName)</p>
+                    <p>On: @Html.DisplayFor(modelItem => appointment.AppointmentDate)</p>
+                    <p>At: @Html.DisplayFor(modelItem => appointment.AppointmentTime)</p>
+                </div>
+                <div class="panel-footer">
+                    <div class="row AppointmentButtonContainer">
+                        <a class="btn btn-info AppointmentButtonContainer__Button" id="Appointment--@Html.DisplayFor(modelItem => appointment.AppointmentId)"
+                           href="/Appointments/Details/@Html.DisplayFor(modelItem => appointment.AppointmentId)">Appointment Details</a>
+                    </div>
+                </div>
 
-<h2>All Upcoming Appointments</h2>
-<div class="container container-fluid"id="AppointmentGrid">
-@foreach(var appointment in Model.Appointments)
-{
-<div class="AppointmentCard container container-fluid list-group-item-info col-md-3" id="AppointmentID--@Html.DisplayFor(modelItem => appointment.AppointmentId)">
-    <div class="row">
-        <div class="container col-md-12 AppointmentContainer__Head">
-            @Html.DisplayFor(modelItem => appointment.DependentFirstName)
-            @Html.DisplayFor(modelItem => appointment.DependentLastName)
+            </div>
         </div>
-    </div>
-    <div class="row">
+            
 
+        }
     </div>
-    <div class="row">
-        <div class="container col-md-2">
-            <p>Dr.@Html.DisplayFor(modelItem => appointment.DoctorLastName)</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="container col-md-2">
-            <p>@Html.DisplayFor(modelItem => appointment.AppointmentDate)</p>
-            <p>@Html.DisplayFor(modelItem => appointment.AppointmentTime)</p>
-        </div>
-    </div>
-
-    <div class="row AppointmentButtonContainer">
-        <a class="btn btn-info AppointmentButtonContainer__Button" id="Appointment--@Html.DisplayFor(modelItem => appointment.AppointmentId)" 
-           href="/Appointments/Details/@Html.DisplayFor(modelItem => appointment.AppointmentId)">Appointment Details</a>
-    </div>
-</div>
-    
-}
-</div>
-<div class="row">
 
 </div>
+
+
+
+
 <div class="contianer container-fluid col-md-12">
     <a class="btn btn-info" href="/appointments/create">Add New Appointment</a>
 </div>
