@@ -103,9 +103,16 @@
 }
 else
 {
-    <div class="container SummaryNoAppointments">
-        <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no appointments scheduled.</h4>
-        <a class="btn btn-info" asp-controller="Appointments" asp-action="Create">Add Appointment</a>
+    <div class="panel panel-warning SummaryNoAppointments">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-alert"></span>
+        </div>
+        <div class="panel-body">
+            <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no appointments scheduled.</h4>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-info" asp-controller="Appointments" asp-action="Create">Add Appointment</a>
+        </div>
     </div>
     
 
@@ -168,14 +175,14 @@ else
                         @Html.DisplayFor(modelItem => prescription.PharmacyPhoneNumber)
                     </td>
                     <td>
-                        <a asp-controller="Prescriptions" asp-action="Details" asp-route-id="@prescription.PrescriptionId">Details</a>
+                        <a class="btn btn-info"asp-controller="Prescriptions" asp-action="Details" asp-route-id="@prescription.PrescriptionId">Details</a>
                     </td>
                 </tr>
             }
     </table>
     <div class="container container-fluid">
         <div class="form-group">
-            <button id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
+            <button asp-controller="Prescriptions" asp-action="ShowAllDependentPrescriptions" id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
         </div>
     </div>
 
@@ -185,9 +192,16 @@ else
 else
 {
 
-    <div class=" container SummaryNoPrescriptions">
-        <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no current Prescriptions.</h4>
-        <a class="btn btn-info" asp-controller="Prescriptions" asp-action="Create">Add Prescription</a>
+    <div class=" panel panel-warning SummaryNoPrescriptions">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-alert"></span>
+        </div>
+        <div class="panel-body">
+            <h4> @Html.DisplayFor(model => model.Dependent.FirstName) Has no current Prescriptions.</h4>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-info" asp-controller="Prescriptions" asp-action="Create">Add Prescription</a>
+        </div>
     </div>
 }
 
