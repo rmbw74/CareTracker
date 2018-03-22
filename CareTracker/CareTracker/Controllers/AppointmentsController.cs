@@ -49,8 +49,9 @@ namespace CareTracker.Controllers
             {
                 return NotFound();
             }
-
-            return View(appointment);
+            var model = new AppointmentDetailsViewModel();
+            model.Appointment = appointment;
+            return View(model);
         }
 
         // GET: Appointments/Create
@@ -101,7 +102,7 @@ namespace CareTracker.Controllers
         // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            var model = new EditAppointmentsViewModel();
+            
             if (id == null)
             {
                 return NotFound();
@@ -113,8 +114,9 @@ namespace CareTracker.Controllers
             {
                 return NotFound();
             }
+            var model = new EditAppointmentsViewModel();
+
             model.Appointment = appointment;
-            
             return View(model);
         }
 

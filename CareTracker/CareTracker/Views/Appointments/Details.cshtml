@@ -1,5 +1,4 @@
-﻿@model CareTracker.Models.Appointment
-
+﻿@model CareTracker.Models.AppointmentViewModels.AppointmentDetailsViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -11,56 +10,56 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentDate)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentDate)
+            @Html.DisplayFor(model => model.Appointment.AppointmentDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentTime)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentTime)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentTime)
+            @Html.DisplayFor(model => model.Appointment.AppointmentTime)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentReason)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentReason)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentReason)
+            @Html.DisplayFor(model => model.Appointment.AppointmentReason)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentAddress)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentAddress)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentAddress)
+            @Html.DisplayFor(model => model.Appointment.AppointmentAddress)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentPhoneNumber)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentPhoneNumber)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentPhoneNumber)
+            @Html.DisplayFor(model => model.Appointment.AppointmentPhoneNumber)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AppointmentNotes)
+            @Html.DisplayNameFor(model => model.Appointment.AppointmentNotes)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AppointmentNotes)
+            @Html.DisplayFor(model => model.Appointment.AppointmentNotes)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Dependent)
+            @Html.DisplayNameFor(model => model.Appointment.Dependent)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Dependent.FirstName)
+            @Html.DisplayFor(model => model.Appointment.Dependent.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Doctor)
+            @Html.DisplayNameFor(model => model.Appointment.Doctor)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Doctor.Address)
+            @Html.DisplayFor(model => model.Appointment.Doctor.LastName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.AppointmentId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Appointment.AppointmentId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
