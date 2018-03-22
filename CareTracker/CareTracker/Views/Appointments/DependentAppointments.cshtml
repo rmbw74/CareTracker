@@ -1,0 +1,83 @@
+﻿@model CareTracker.Models.AppointmentViewModels.DependentAppointmentViewModel
+@{
+    ViewData["Title"] = "Appointment History";
+    var appointmenttableheaders = Model.Appointments.FirstOrDefault();
+    int returnid = Model.Dependent.DependentId;
+
+}
+@if (Model.Appointments.Count > 0)
+{
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Appointment History for @Html.DisplayFor(ModelItem => Model.Dependent.FirstName) @Html.DisplayFor(ModelItem => Model.Dependent.LastName)</div>
+        <div class="panel-body">
+
+        </div>
+
+        <table id="AppointmentHistoryTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentReason)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => appointmenttableheaders.DoctorLastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => appointmenttableheaders.AppointmentPhone)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model.Appointments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => appointment.AppointmentDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => appointment.AppointmentTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => appointment.AppointmentReason)
+                        </td>
+                        <td>
+                            <a asp-controller="doctors" asp-action="Details" asp-route-id="@appointment.DoctorId">@Html.DisplayFor(modelItem => appointment.DoctorLastName)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => appointment.AppointmentPhone)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-controller="Appointments" asp-action="Details" asp-route-id="@appointment.AppointmentId">Details</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+}
+else
+{
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Appointment History for @Html.DisplayFor(ModelItem => Model.Dependent.FirstName) @Html.DisplayFor(ModelItem => Model.Dependent.LastName)</div>
+        <div class="panel-body">
+            <p>Sorry, There is no appointment history for this dependent</p>
+        </div>
+      </div>
+
+}
+<a class="btn btn-info" id="Summary--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" asp-controller="Summary" asp-action="Show" asp-route-id="@Model.Dependent.DependentId">Back to Summary</a>
+
+

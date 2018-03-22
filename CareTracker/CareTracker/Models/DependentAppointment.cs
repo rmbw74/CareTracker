@@ -12,6 +12,7 @@ namespace CareTracker.Models
         public int DependentId { get; set; }
         public int DoctorId { get; set; }
         public string DoctorFirstName { get; set; }
+        [Display(Name = "Doctor")]
         public string DoctorLastName { get; set; }
         public string DependentFirstName { get; set; }
         public string DependentLastName { get; set; }
@@ -21,9 +22,13 @@ namespace CareTracker.Models
         [Display(Name = "Time")]
         [DataType(DataType.Time)]
         public DateTime AppointmentTime { get; set; }
+        [Display(Name = "Reason")]
         public string AppointmentReason { get; set; }
+        [Display(Name = "Address")]
         public string AppointmentAddress { get; set; }
+        [Display(Name = "Phone")]
         public string AppointmentPhone { get; set; }
+        [Display(Name = "Notes")]
         public string AppointmentNotes { get; set; }
 
     }

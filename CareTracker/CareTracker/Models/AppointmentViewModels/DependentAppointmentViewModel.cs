@@ -8,7 +8,7 @@ namespace CareTracker.Models.AppointmentViewModels
     public class DependentAppointmentViewModel
 
     {
-        
+        public Dependent Dependent { get; set; }
         public ICollection<DependentAppointment> Appointments { get; set; }
     }
 }
