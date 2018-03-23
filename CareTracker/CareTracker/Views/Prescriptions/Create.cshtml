@@ -1,91 +1,99 @@
 ﻿@model CareTracker.Models.PrescriptionViewModels.PrescriptionCreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Prescription";
 }
 
-<h2>Create</h2>
 
-<h4>Prescription</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DependentList)
-                @Html.DropDownList(
-              "Prescription.DependentId",
-              @Model.DependentList,
-             new
-             {
-                 @name = "Prescription.DependentId",
-                 @class = "form-control"
-             }
-             )
-                @Html.ValidationMessageFor(model => model.DependentList, "", new { @class = "text-danger" })
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Create New Prescription</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DependentList)
+                        @Html.DropDownList(
+                       "Prescription.DependentId",
+                       @Model.DependentList,
+                      new
+                      {
+                          @name = "Prescription.DependentId",
+                          @class = "form-control"
+                      }
+                      )
+                        @Html.ValidationMessageFor(model => model.DependentList, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DoctorList)
+                        @Html.DropDownList(
+                       "Prescription.DoctorId",
+                       @Model.DoctorList,
+                      new
+                      {
+                          @name = "Prescription.DoctorId",
+                          @class = "form-control"
+                      }
+                      )
+                        @Html.ValidationMessageFor(model => model.DoctorList, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.DrugName" class="control-label"></label>
+                        <input asp-for="Prescription.DrugName" class="form-control" />
+                        <span asp-validation-for="Prescription.DrugName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.Dosage" class="control-label"></label>
+                        <input asp-for="Prescription.Dosage" class="form-control" />
+                        <span asp-validation-for="Prescription.Dosage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.Frequency" class="control-label"></label>
+                        <input asp-for="Prescription.Frequency" class="form-control" />
+                        <span asp-validation-for="Prescription.Frequency" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.PharmacyAddress" class="control-label"></label>
+                        <input asp-for="Prescription.PharmacyAddress" class="form-control" />
+                        <span asp-validation-for="Prescription.PharmacyAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.PharmacyPhoneNumber" class="control-label"></label>
+                        <input asp-for="Prescription.PharmacyPhoneNumber" class="form-control" />
+                        <span asp-validation-for="Prescription.PharmacyPhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prescription.PrescriptionNotes" class="control-label"></label>
+                        <input asp-for="Prescription.PrescriptionNotes" class="form-control" />
+                        <span asp-validation-for="Prescription.PrescriptionNotes" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="Prescription.PrescriptionActive" /> @Html.DisplayNameFor(model => model.Prescription.PrescriptionActive)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-info" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DoctorList)
-                @Html.DropDownList(
-              "Prescription.DoctorId",
-              @Model.DoctorList,
-             new
-             {
-                 @name = "Prescription.DoctorId",
-                 @class = "form-control"
-             }
-             )
-                @Html.ValidationMessageFor(model => model.DoctorList, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.DrugName" class="control-label"></label>
-                <input asp-for="Prescription.DrugName" class="form-control" />
-                <span asp-validation-for="Prescription.DrugName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.Dosage" class="control-label"></label>
-                <input asp-for="Prescription.Dosage" class="form-control" />
-                <span asp-validation-for="Prescription.Dosage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.Frequency" class="control-label"></label>
-                <input asp-for="Prescription.Frequency" class="form-control" />
-                <span asp-validation-for="Prescription.Frequency" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.PharmacyAddress" class="control-label"></label>
-                <input asp-for="Prescription.PharmacyAddress" class="form-control" />
-                <span asp-validation-for="Prescription.PharmacyAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.PharmacyPhoneNumber" class="control-label"></label>
-                <input asp-for="Prescription.PharmacyPhoneNumber" class="form-control" />
-                <span asp-validation-for="Prescription.PharmacyPhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prescription.PrescriptionNotes" class="control-label"></label>
-                <input asp-for="Prescription.PrescriptionNotes" class="form-control" />
-                <span asp-validation-for="Prescription.PrescriptionNotes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Prescription.PrescriptionActive" /> @Html.DisplayNameFor(model => model.Prescription.PrescriptionActive)
-                    </label>
-                </div>
-            </div>
-           
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
+
+        
+    </div>
+    <div class="panel-footer">
+        <div>
+            <a class="btn btn-info"asp-action="Index">Back</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
