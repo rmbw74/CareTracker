@@ -112,8 +112,11 @@ namespace CareTracker.Controllers
             {
                 return NotFound();
             }
+            var model = new DoctorsDetailsViewModel();
 
-            return View(doctor);
+                model.Doctor = doctor;
+
+            return View(model);
         }
 
         // GET: Doctors/Create
