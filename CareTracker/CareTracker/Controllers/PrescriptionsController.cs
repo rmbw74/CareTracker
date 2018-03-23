@@ -204,5 +204,17 @@ namespace CareTracker.Controllers
                         PrescriptionActive = p.PrescriptionActive
                     }).OrderBy(p => p.DependentId).OrderBy(p => p.PrescriptionActive).ToList();
         }
+        public async Task<IActionResult> PrescriptionHistory(int id)
+        {
+            var model = new PrescriptionHistoryViewModel();
+
+            model.Dependent = await _context.Dependent.Where(d => d.DependentId == id).SingleOrDefaultAsync();
+
+            model.Prescriptions = await _context.Prescription
+                                                .Include("Doctor")
+                                                .Where(p => p.DependentId == id).ToListAsync();
+
+            return View(model);
+        }
     }
 }
