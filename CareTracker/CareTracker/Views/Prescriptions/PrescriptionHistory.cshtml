@@ -1,0 +1,72 @@
+﻿@model CareTracker.Models.PrescriptionViewModels.PrescriptionHistoryViewModel
+
+
+@{
+    ViewData["Title"] = "Prescription History";
+    var prescriptiontableheaders = Model.Prescriptions.FirstOrDefault();
+}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>Prescription History For @Html.DisplayFor(model => model.Dependent.FirstName) @Html.DisplayFor(model => model.Dependent.LastName)</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.DrugName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.Dosage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.Frequency)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.PharmacyPhoneNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.Doctor.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => prescriptiontableheaders.PrescriptionActive)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var script in Model.Prescriptions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => script.DrugName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => script.Dosage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => script.Frequency)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => script.PharmacyPhoneNumber)
+                        </td>
+                        <td>
+                            <a asp-controller="Doctors" asp-action="Details" asp-route-id="@script.DoctorId">@Html.DisplayFor(modelItem => script.Doctor.LastName)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => script.PrescriptionActive)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" asp-action="Edit" asp-route-id="@script.PrescriptionId">Edit</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
