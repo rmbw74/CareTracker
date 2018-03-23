@@ -7,5 +7,7 @@ namespace CareTracker.Models.PrescriptionViewModels
 {
     public class PrescriptionHistoryViewModel
     {
+        public ICollection <Prescription> Prescriptions { get; set; }
+        public Dependent Dependent { get; set; }
     }
 }
