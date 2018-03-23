@@ -182,7 +182,7 @@ else
     </table>
     <div class="container container-fluid">
         <div class="form-group">
-            <button asp-controller="Prescriptions" asp-action="ShowAllDependentPrescriptions" id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</button>
+            <a asp-controller="Prescriptions" asp-action="PrescriptionHistory" asp-route-id="@Model.Dependent.DependentId" id="Summary_ShowAllPrescriptions_Button--@Html.DisplayFor(ModelItem => Model.Dependent.DependentId)" type="button" class="btn btn-info">See All Prescriptions</a>
         </div>
     </div>
 
