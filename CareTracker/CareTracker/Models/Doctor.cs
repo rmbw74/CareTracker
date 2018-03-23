@@ -17,7 +17,7 @@ namespace CareTracker.Models
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Hospital AFfiliation")]
+        [Display(Name = "Hospital Affiliation")]
         public string Hospital { get; set; }
 
         [Required]

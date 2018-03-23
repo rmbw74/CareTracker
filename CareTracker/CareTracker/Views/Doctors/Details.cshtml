@@ -1,54 +1,43 @@
-﻿@model CareTracker.Models.Doctor
+﻿@model CareTracker.Models.DoctorsViewModels.DoctorsDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Doctor Details";
 }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>Details for Dr.@Html.DisplayFor(Model => Model.Doctor.FirstName) @Html.DisplayFor(Model => Model.Doctor.LastName)</h2>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor.Hospital)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Doctor.Hospital)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor.Specialty)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Doctor.Specialty)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Doctor.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Doctor.PhoneNumber)
+            </dd>
+        </dl>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-info" asp-action="index" asp-controller="Doctors">See Doctor List</a>
+    </div>
+ </div>
 
-<h2>Details</h2>
-
-<div>
-    <h4>Doctor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hospital)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hospital)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Specialty)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Specialty)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.DoctorId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+ 

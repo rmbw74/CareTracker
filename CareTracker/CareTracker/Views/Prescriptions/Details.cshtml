@@ -1,72 +1,72 @@
-﻿@model CareTracker.Models.Prescription
+﻿@model CareTracker.Models.PrescriptionViewModels.PrescriptionDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Prescription Details";
 }
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>@Html.DisplayFor(model => model.Prescription.Dependent.FirstName) @Html.DisplayFor(model => model.Prescription.Dependent.LastName)'s Prescription Details</h4>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.DrugName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.DrugName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.Dosage)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.Dosage)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.Frequency)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.Frequency)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.PharmacyAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.PharmacyAddress)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.PharmacyPhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.PharmacyPhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.PrescriptionNotes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.PrescriptionNotes)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.PrescriptionActive)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.PrescriptionActive)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prescription.Doctor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prescription.Doctor.FirstName) @Html.DisplayFor(model => model.Prescription.Doctor.LastName)
+            </dd>
+        </dl>
+    </div>
+    <div class="panel-footer">
+        <div>
+            <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Prescription.PrescriptionId">Edit</a>
+            <a class="btn btn-info" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+ </div>
 
-<h2>Details</h2>
 
-<div>
-    <h4>Prescription</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DrugName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DrugName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Dosage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dosage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Frequency)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Frequency)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PharmacyAddress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PharmacyAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PharmacyPhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PharmacyPhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PrescriptionNotes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PrescriptionNotes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PrescriptionActive)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PrescriptionActive)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Dependent)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dependent.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Doctor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Doctor.Address)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PrescriptionId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
