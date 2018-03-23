@@ -171,7 +171,8 @@ namespace CareTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Show", "Summary", new { id = dependent.DependentId });
             }
             return View(dependent);
         }

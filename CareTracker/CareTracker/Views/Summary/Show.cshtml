@@ -23,7 +23,11 @@
                 <div id="DependentSummaryNotes_Notes">
                     <h5>@Html.DisplayFor(model => model.Dependent.DependentNotes)</h5>
                 </div>
-                
+
+                <div>
+                    <a asp-action="Edit" asp-controller="Dependents" asp-route-id="@Model.Dependent.DependentId"><span class="glyphicon glyphicon-cog"></span> </a>
+                </div>
+
             </div>
 
         </div>
