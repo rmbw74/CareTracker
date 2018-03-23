@@ -201,15 +201,43 @@ namespace CareTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var dependent = await _context.Dependent.SingleOrDefaultAsync(m => m.DependentId == id);
-            _context.Dependent.Remove(dependent);
-            await _context.SaveChangesAsync();
+            ApplicationUser user = await GetCurrentUserAsync();
+            //check to see if user has been shared
+            bool Decision = HasUserBeenShared(id);
+
+            if(Decision == false)
+            {
+                //delete the entire dependent from the dependent table
+                var dependent = await _context.Dependent.SingleOrDefaultAsync(m => m.DependentId == id);
+                _context.Dependent.Remove(dependent);
+                await _context.SaveChangesAsync();
+               
+            }
+            if (DependentExists(id))
+            {
+                //delete the UserDependent entry for the current user and dependent
+                var Userdependent = await _context.DependentUser.SingleOrDefaultAsync(m => m.DependentId == id && m.User == user);
+                _context.DependentUser.Remove(Userdependent);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool DependentExists(int id)
         {
             return _context.Dependent.Any(e => e.DependentId == id);
+        }
+        public bool HasUserBeenShared(int id)
+        {
+            //count the amount of times the user id appears in the DependentUser Table
+            int count = _context.DependentUser.Count(m => m.DependentId == id);
+            //If count is higher than one, then send back 
+            if (count > 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
