@@ -1,65 +1,67 @@
 ﻿@model CareTracker.Models.AppointmentViewModels.AppointmentDetailsViewModel
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Appointment Details";
 }
 
-<h2>Details</h2>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Appointment Details</h4>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentReason)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentReason)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentAddress)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentPhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentPhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.AppointmentNotes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.AppointmentNotes)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.Dependent)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.Dependent.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Appointment.Doctor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Appointment.Doctor.LastName)
+            </dd>
+        </dl>
+    </div>
 
-<div>
-    <h4>Appointment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentReason)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentReason)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentAddress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentPhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentPhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.AppointmentNotes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.AppointmentNotes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.Dependent)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.Dependent.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment.Doctor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Appointment.Doctor.LastName)
-        </dd>
-    </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Appointment.AppointmentId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-info"asp-action="Edit" asp-route-id="@Model.Appointment.AppointmentId">Edit</a>
+    <a class="btn btn-info"asp-action="Index">Back to List</a>
 </div>

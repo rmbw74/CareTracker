@@ -56,8 +56,9 @@ namespace CareTracker.Controllers
             {
                 return NotFound();
             }
-
-            return View(prescription);
+            var model = new PrescriptionDetailsViewModel();
+            model.Prescription = prescription;
+            return View(model);
         }
 
         // GET: Prescriptions/Create
